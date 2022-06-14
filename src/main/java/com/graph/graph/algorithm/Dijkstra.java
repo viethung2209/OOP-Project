@@ -2,13 +2,10 @@ package com.graph.graph.algorithm;
 
 import com.graph.graph.graphcore.Graph;
 
-public class BFS extends Algorithm {
-    private Graph graph;
+public class Dijkstra extends Algorithm {
     @Override
     public void explore() {
         // TODO
-        System.out.println("BFS");
+        System.out.println("Dijkstra");
     }
-
 }
-
