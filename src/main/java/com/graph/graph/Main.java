@@ -5,6 +5,7 @@ import com.graph.graph.algorithm.BFS;
 import com.graph.graph.algorithm.Dijkstra;
 import com.graph.graph.context.Context;
 import com.graph.graph.graphcore.Graph;
+import com.graph.graph.utils.PressEnterToContinue;
 
 import java.util.Scanner;
 
@@ -14,21 +15,11 @@ public class Main {
     private static Context context = new Context();
 
     public static void main(String[] args) {
-        graph.addVertex("B");
-        graph.addVertex("A");
-        graph.addVertex("A");
-        graph.addVertex("D");
-        graph.addVertex("C");
-        graph.addEdge("C", "D", 4);
-        graph.addEdge("C", "D", 3);
-        graph.addEdge("A", "B", 1);
-        graph.addEdge("B", "D", 3);
-        graph.addEdge("A", "C", 2);
+
         // show graph
         System.out.println(graph.toString());
         // show menu
         Scanner scanner = new Scanner(System.in);
-        int choose = 0;
         do {
             System.out.println("----------------------------------------------------");
             System.out.println("Single shortest path algorithm");
@@ -37,6 +28,7 @@ public class Main {
             System.out.println("3. Play");
             System.out.println("0. Exit");
             System.out.println("----------------------------------------------------");
+            int choose;
             switch (choose = scanner.nextInt()) {
                 case 1:
                     graphFunction();
@@ -47,77 +39,95 @@ public class Main {
                 case 3:
                     context.setAlgorithm(algorithm);
                     context.play();
+                    PressEnterToContinue.run();
                     break;
                 case 0:
                     return; // exit
             }
-        } while (choose != 0);
+        } while (true);
     }
 
     public static void chooseAlgorithm() {
         Scanner scanner = new Scanner(System.in);
-        int choose = 0;
+
         do {
             System.out.println("----------------------------------------------------");
             System.out.println("Choose algorithm");
             System.out.println("1. BFS");
             System.out.println("2. Dijkstra");
+            System.out.println("3. BellmanFord");
             System.out.println("0. Back");
             System.out.println("----------------------------------------------------");
+            int choose;
             switch (choose = scanner.nextInt()) {
                 case 1:
                     algorithm = new BFS();
                     algorithm.setGraph(graph);
-                    break;
+                    System.out.println("BFS is selected");
+                    PressEnterToContinue.run();
+                    return;
                 case 2:
                     algorithm = new Dijkstra();
                     algorithm.setGraph(graph);
-                    break;
+                    System.out.println("Dijkstra is selected");
+                    PressEnterToContinue.run();
+                    return;
                 case 0:
                     return; // exit
+                default:
+                    System.out.println("Invalid input");
+                    break;
             }
-        } while (choose != 0);
+        } while (true);
     }
 
     public static void graphFunction() {
         Scanner sc = new Scanner(System.in);
-        int choose = 0;
         do {
             System.out.println("-----------------------------------------------------");
             System.out.println("1. Create new Graph");
-            System.out.println("2. Add vertex");
-            System.out.println("3. Add edge");
-            System.out.println("4. Remove vertex");
-            System.out.println("5. Remove edge");
-            System.out.println("6. Show graph");
-            System.out.println("0. Exit");
+            System.out.println("2. Use example Graph");
+            System.out.println("3. Add vertex");
+            System.out.println("4. Add edge");
+            System.out.println("5. Remove vertex");
+            System.out.println("6. Remove edge");
+            System.out.println("7. Show graph");
+            System.out.println("0. Back");
             System.out.println("-----------------------------------------------------");
+            int choose = 0;
             choose = sc.nextInt();
             sc.nextLine();
             switch (choose) {
                 case 1:
                     graph = new Graph();
                     System.out.println("Create new Graph successfully");
+                    PressEnterToContinue.run();
                     break;
                 case 2:
-                    addVertexToGraph();
+                    graph = Graph.createGraph();
+                    System.out.println("Use example Graph successfully");
+                    PressEnterToContinue.run();
                     break;
                 case 3:
-                    addEdgeToGraph();
+                    addVertexToGraph();
                     break;
                 case 4:
-                    removeVertexFromGraph();
+                    addEdgeToGraph();
                     break;
                 case 5:
-                    removeEdgeFromGraph();
+                    removeVertexFromGraph();
                     break;
                 case 6:
-                    System.out.println(graph.toString());
-                case 0:
-                    System.out.println("Exit");
+                    removeEdgeFromGraph();
                     break;
+                case 7:
+                    System.out.println(graph.toString());
+                    PressEnterToContinue.run();
+                    break;
+                case 0:
+                    return;
             }
-        } while (choose != 0);
+        } while (true);
     }
 
     public static void addVertexToGraph() {
@@ -132,6 +142,7 @@ public class Main {
                     System.out.println("Enter vertex name: ");
                     String vertexName = sc.nextLine();
                     graph.addVertex(vertexName);
+                    PressEnterToContinue.run();
                     break;
                 case 0:
                     System.out.println("Exit");
@@ -157,6 +168,7 @@ public class Main {
                     int weight = sc.nextInt();
                     sc.nextLine();
                     graph.addEdge(vertexName, vertexName2, weight);
+                    PressEnterToContinue.run();
                     break;
                 case 0:
                     System.out.println("Exit");
@@ -177,6 +189,7 @@ public class Main {
                     System.out.println("Enter vertex name: ");
                     String vertexName = sc.nextLine();
                     graph.removeVertex(vertexName);
+                    PressEnterToContinue.run();
                     break;
                 case 0:
                     System.out.println("Exit");
@@ -199,10 +212,10 @@ public class Main {
                     System.out.println("Enter vertex name: ");
                     String vertexName2 = sc.nextLine();
                     graph.removeEdge(vertexName, vertexName2);
+                    PressEnterToContinue.run();
                     break;
                 case 0:
-                    System.out.println("Exit");
-                    break;
+                    return;
             }
         } while (choose != 0);
     }
