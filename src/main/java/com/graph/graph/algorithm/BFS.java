@@ -6,8 +6,6 @@ import com.graph.graph.graphcore.Vertex;
 import java.util.*;
 
 public class BFS extends Algorithm {
-    private Graph graph;
-
     @Override
     public void explore() {
         // TODO
@@ -73,16 +71,6 @@ public class BFS extends Algorithm {
                 v = parent.get(v);
             }
         }
-    }
-
-    @Override
-    public Graph getGraph() {
-        return graph;
-    }
-
-    @Override
-    public void setGraph(Graph graph) {
-        this.graph = graph;
     }
 }
 

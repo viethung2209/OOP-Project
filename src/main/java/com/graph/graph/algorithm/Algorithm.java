@@ -3,7 +3,8 @@ package com.graph.graph.algorithm;
 import com.graph.graph.graphcore.Graph;
 
 public abstract class Algorithm {
-    private Graph graph;
+    protected Graph graph;
+
     public abstract void explore();
 
     public Graph getGraph() {
